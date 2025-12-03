@@ -6,7 +6,7 @@ const input = importText("../day-2/input.txt").split(",")
 const rangeArray = input.map(v => (v.split("-").map(v => Number.parseInt(v)))).filter((arr): arr is Range => arr.length === 2)
 const getNumberOfDigits = (number: number) => Math.floor(Math.log10(number)) + 1
 const getFirstHalfDigitsOfNumber = (evenDigitsNumber: number) => Math.floor(evenDigitsNumber / (10 ** ((getNumberOfDigits(evenDigitsNumber)) / 2)))
-const getArrayFromRange = (range: Range) => [...Array(range[1] + 1).keys()].filter(v => v >= range[0])
+const getArrayFromRange = ([min, max]: Range) => Array.from({ length: max - min + 1 }, (_, i) => min + i)
 const getFactor = (number: number) => [...[...Array(Math.floor(Math.sqrt(number)) + 1).keys()]
     .reduce((a, v) => {
         if (number % v === 0) {
@@ -49,10 +49,7 @@ const result2 = [...new Set(rangeArray.flatMap(range => {
         return arrayOfNumberOfDigitsInPattern.flatMap(numberOfDigitsInPattern => numbersInPatternInRange(rangeOfDigitInResult, numberOfDigitsInPattern))
     })
 }))].reduce((a, v) => a + v, 0)
-const start = performance.now()
-log({result2})
-const end = performance.now()
-log(()=> end - start)
+
 export default {
     "part-1": result,
     "part-2": result2
