@@ -29,7 +29,7 @@ const addARangeInmainRanges = (mainRanges: Range[], addingRange: Range) => {
         const newRangeEnd = rangeEnd > currentRangeEnd ? rangeEnd : currentRangeEnd
         return [newRangeStart, newRangeEnd] as Range
     }, addingRange)
-    return separatedRanges.concat([unionRange]).sort((a, b) => a[0] - b[0])
+    return separatedRanges.concat([unionRange])
 }
 const result2 = ranges.reduce(addARangeInmainRanges, [] as Range[]).reduce((a, v) => a + v[1] - v[0] + 1, 0)
 // log({ blankIndex, ranges, ids, result2 })
